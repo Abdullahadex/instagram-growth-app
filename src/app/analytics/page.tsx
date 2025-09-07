@@ -1,13 +1,40 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '@/components/Header'
 import { FollowModal } from '@/components/FollowModal'
 import { useApp } from '@/components/providers/AppProvider'
 import { BarChart3, TrendingUp, Users, Heart } from 'lucide-react'
 
+type Account = { id: string; username: string; profile_picture_url?: string }
+type MediaItem = { id: string; caption?: string; media_type: string; media_url: string; permalink: string; timestamp: string }
+
 export default function AnalyticsPage() {
   const { analytics } = useApp()
+  const [account, setAccount] = useState<Account | null>(null)
+  const [media, setMedia] = useState<MediaItem[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const base = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
+        const res = await fetch(`${base}/instagram/me`)
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Failed to load')
+        setAccount(data.account)
+        setMedia(Array.isArray(data.media?.data) ? data.media.data : [])
+      } catch (e: any) {
+        setError(e?.message || 'Error fetching data')
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,26 +84,41 @@ export default function AnalyticsPage() {
             <div className="card">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Growth Trend</h2>
               <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500">Chart visualization would go here</p>
+                {loading ? (
+                  <p className="text-gray-500">Loading...</p>
+                ) : error ? (
+                  <p className="text-red-600">{error}</p>
+                ) : account ? (
+                  <div className="text-center">
+                    <p className="text-gray-800 font-medium">@{account.username}</p>
+                    <p className="text-gray-500 text-sm">Connected Instagram account</p>
+                  </div>
+                ) : (
+                  <p className="text-gray-500">Connect your Instagram to load data</p>
+                )}
               </div>
             </div>
             
             <div className="card">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Top Performing Content</h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm">AI Caption: "Sunset vibes..."</span>
-                  <span className="text-green-600 font-medium">1.2K likes</span>
+              {loading ? (
+                <p className="text-gray-500">Loading...</p>
+              ) : error ? (
+                <p className="text-red-600">{error}</p>
+              ) : media.length > 0 ? (
+                <div className="space-y-4">
+                  {media.slice(0, 5).map((m) => (
+                    <div key={m.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <a href={m.permalink} target="_blank" className="text-sm text-blue-600 hover:underline">
+                        {m.caption?.slice(0, 60) || m.media_type}
+                      </a>
+                      <span className="text-gray-600 text-sm">{new Date(m.timestamp).toLocaleString()}</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm">Quiz: "What's your 2025 vibe?"</span>
-                  <span className="text-green-600 font-medium">890 shares</span>
-                </div>
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm">Wallpaper: "Minimalist mountain"</span>
-                  <span className="text-green-600 font-medium">654 saves</span>
-                </div>
-              </div>
+              ) : (
+                <p className="text-gray-500">No media yet. Create and publish to see performance here.</p>
+              )}
             </div>
           </div>
         </div>
