@@ -62,8 +62,8 @@ This app implements 6 proven viral mechanics:
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd insta-growth-app
+   git clone https://github.com/Abdullahadex/instagram-growth-app.git
+   cd instagram-growth-app
    ```
 
 2. **Install dependencies**
