@@ -118,3 +118,17 @@ This project is for educational and personal use. Please respect Instagram's Ter
 ---
 
 **Ready to grow your Instagram? Start creating viral content and building your community today! 🚀**
+
+## Backend API Integration
+
+- Start backend: from `ig-growth-app` run `npm run dev` (http://localhost:4000)
+- Set Next.js env: create `.env.local` in project root with:
+
+```
+NEXT_PUBLIC_API_BASE=http://localhost:4000
+```
+
+- Use endpoints:
+  - `GET /auth/facebook/login` (redirect to connect)
+  - `GET /instagram/me` (account + recent media)
+  - `GET /instagram/discover/:username` (competitor insights)

@@ -68,6 +68,15 @@ export const Header: React.FC = () => {
                 Premium
               </div>
             )}
+            <button
+              onClick={() => {
+                const base = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
+                window.location.href = `${base}/auth/facebook/login`
+              }}
+              className="px-3 py-2 rounded-lg text-sm font-medium bg-instagram-gradient text-white hover:opacity-90"
+            >
+              Connect Instagram
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
