@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Instagram, Sparkles, Users, Calendar, Gift, BarChart3, Menu, X } from 'lucide-react'
+import { Instagram, Sparkles, Users, Calendar, Gift, BarChart3, Menu, X, Zap, Hash, Clock } from 'lucide-react'
 import { useApp } from './providers/AppProvider'
 
 export const Header: React.FC = () => {
@@ -13,10 +13,11 @@ export const Header: React.FC = () => {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Sparkles },
+    { path: '/automation', label: 'Automation', icon: Zap },
+    { path: '/content-scheduler', label: 'Scheduler', icon: Clock },
+    { path: '/hashtag-research', label: 'Hashtags', icon: Hash },
     { path: '/ai-content', label: 'AI Content', icon: Sparkles },
     { path: '/engagement-pods', label: 'Engagement', icon: Users },
-    { path: '/scheduling', label: 'Scheduling', icon: Calendar },
-    { path: '/referrals', label: 'Referrals', icon: Gift },
     { path: '/analytics', label: 'Analytics', icon: BarChart3 },
   ]
 

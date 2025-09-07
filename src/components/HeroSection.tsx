@@ -19,12 +19,12 @@ export const HeroSection: React.FC = () => {
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Grow Your Instagram to <span className="gradient-text">10K+ Followers</span>
+            Automate Your Instagram Growth to <span className="gradient-text">10K+ Followers</span>
           </h2>
           
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Use AI-powered content creation, viral sharing mechanics, and ethical engagement pods 
-            to build real influence on Instagram. No shadowbans, no fake followers.
+            Complete Instagram automation suite: auto-engagement, smart scheduling, hashtag research, 
+            and AI content creation. Grow your account 24/7 while you sleep.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
