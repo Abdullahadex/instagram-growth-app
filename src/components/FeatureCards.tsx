@@ -11,7 +11,8 @@ import {
   BarChart3,
   Lock,
   Unlock,
-  ArrowRight
+  ArrowRight,
+  Instagram
 } from 'lucide-react'
 import { useApp } from './providers/AppProvider'
 
