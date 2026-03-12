@@ -11,7 +11,12 @@ import {
   BarChart3,
   Lock,
   Unlock,
-  ArrowRight
+  ArrowRight,
+  Instagram,
+  Zap,
+  Hash,
+  Clock,
+  Target
 } from 'lucide-react'
 import { useApp } from './providers/AppProvider'
 
@@ -20,6 +25,33 @@ export const FeatureCards: React.FC = () => {
 
   const features = [
     {
+      id: 'automation',
+      title: 'Instagram Automation',
+      description: 'Auto-like, follow, and comment to grow your account 24/7',
+      icon: Zap,
+      href: '/automation',
+      requiresFollow: false,
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      id: 'content-scheduler',
+      title: 'Content Scheduler',
+      description: 'Schedule posts for optimal engagement times automatically',
+      icon: Clock,
+      href: '/content-scheduler',
+      requiresFollow: false,
+      color: 'from-green-500 to-blue-500'
+    },
+    {
+      id: 'hashtag-research',
+      title: 'Hashtag Research',
+      description: 'Find the best hashtags for maximum reach and engagement',
+      icon: Hash,
+      href: '/hashtag-research',
+      requiresFollow: false,
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
       id: 'ai-content',
       title: 'AI Content Generator',
       description: 'Generate viral captions, image edits, wallpapers, filters, and quizzes',
@@ -27,15 +59,6 @@ export const FeatureCards: React.FC = () => {
       href: '/ai-content',
       requiresFollow: true,
       color: 'from-purple-500 to-pink-500'
-    },
-    {
-      id: 'viral-sharing',
-      title: 'Viral Sharing Loop',
-      description: 'Every output has your handle watermarked for maximum exposure',
-      icon: Share2,
-      href: '/viral-sharing',
-      requiresFollow: false,
-      color: 'from-orange-500 to-red-500'
     },
     {
       id: 'engagement-pods',

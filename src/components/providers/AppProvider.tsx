@@ -39,7 +39,7 @@ export const useApp = () => {
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
   const [showFollowModal, setShowFollowModal] = useState(false)
-  const [instagramHandle, setInstagramHandle] = useState('@your_handle')
+  const [instagramHandle, setInstagramHandle] = useState('@scream_in_vowels')
   const [analytics, setAnalytics] = useState({
     followers: 1250,
     engagement: 4.2,

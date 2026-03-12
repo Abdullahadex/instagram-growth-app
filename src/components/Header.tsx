@@ -3,21 +3,18 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Instagram, Sparkles, Users, Calendar, Gift, BarChart3, Menu, X } from 'lucide-react'
+import { Instagram, Sparkles, Menu, X, BarChart3, Hash } from 'lucide-react'
 import { useApp } from './providers/AppProvider'
 
 export const Header: React.FC = () => {
-  const { user, instagramHandle } = useApp()
+  const { instagramHandle } = useApp()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems = [
     { path: '/', label: 'Home', icon: Sparkles },
-    { path: '/ai-content', label: 'AI Content', icon: Sparkles },
-    { path: '/engagement-pods', label: 'Engagement', icon: Users },
-    { path: '/scheduling', label: 'Scheduling', icon: Calendar },
-    { path: '/referrals', label: 'Referrals', icon: Gift },
     { path: '/analytics', label: 'Analytics', icon: BarChart3 },
+    { path: '/hashtag-research', label: 'Hashtags', icon: Hash },
   ]
 
   return (
@@ -50,24 +47,12 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* User Status */}
+          {/* Account label */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Instagram className="h-4 w-4 text-instagram-pink" />
-              <span className="text-sm text-gray-600">{instagramHandle}</span>
-            </div>
-            <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-              user?.hasFollowed 
-                ? 'bg-green-100 text-green-800' 
-                : 'bg-yellow-100 text-yellow-800'
-            }`}>
-              {user?.hasFollowed ? 'Following' : 'Not Following'}
-            </div>
-            {user?.isPremium && (
-              <div className="px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                Premium
-              </div>
-            )}
+            <Instagram className="h-4 w-4 text-instagram-pink" />
+            <span className="text-sm text-gray-700">
+              Personal dashboard for <span className="font-semibold">{instagramHandle}</span>
+            </span>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,13 +87,6 @@ export const Header: React.FC = () => {
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">{instagramHandle}</span>
-                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  user?.hasFollowed 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-yellow-100 text-yellow-800'
-                }`}>
-                  {user?.hasFollowed ? 'Following' : 'Not Following'}
-                </div>
               </div>
             </div>
           </div>
